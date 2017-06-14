@@ -1,0 +1,35 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "mongodb": "mongodb://localhost:27017/recipes_api_b8",
+  "authentication": {
+    "secret": "bdfdf14fe63d61b9d6a95d573780b4f145db3c262b1ad9c8144a1cd1a3ceb9dc352f2f4203043d65646c1dfea2b96ba9834cff73fd71922bf7b3c31b3ffc4e20737b3c673f38bc164e9cbe0416564eb642554ed28e1dcf453db8e2b920dc90fe867f1e754ecf9e66e2f3168ee95f229ae8a63fa97589e2d30fdff271f279e02e172e6deeb787cbed276b54d4c1eadfc4fc4eb246d91c9d4ea248c00a341537e17a6386c86f4093fc41deb326af0cad2df3e0d46f90c70c31d0e857edd7acb2af5844bd894056eac396b765a43dc92e351ef2065f262c11edb4bf03cab683b48e92089a07ea144b8324f5cdc75299d027734821ee906b7705e860103ddb7e2dec",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
+}
