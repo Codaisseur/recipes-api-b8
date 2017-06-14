@@ -18,11 +18,6 @@ module.exports = function (app) {
     description: { type: String, required: true }
   });
 
-  const userSchema = new Schema({
-    userId: { type: Schema.Types.ObjectId, ref: 'user' },
-    name: { type: String, required: true }
-  });
-
   const recipes = new Schema({
     title: { type: String, required: true },
     summary: { type: String, required: true },
@@ -33,8 +28,8 @@ module.exports = function (app) {
     cookingTime: { type: Number, required: false }, // in minutes
     ingredients: [ingredientSchema],
     cookingSteps: [cookingStepSchema],
-    likedBy: [ userSchema ],
-    authorId: { type: Schema.Types.ObjectId, ref: 'user' },
+    likedBy: [{ type: Schema.Types.ObjectId, ref: 'users' }],
+    authorId: { type: Schema.Types.ObjectId, ref: 'users' },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
   });
