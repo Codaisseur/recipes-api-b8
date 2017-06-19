@@ -26,10 +26,11 @@ const likerSchema = {
 
 const restrict = [
   authenticate('jwt'),
-  restrictToOwner({
-    ownerField: 'authorId'
-  })
+  restrictToAuthenticated(),
 ];
+
+const makeLikable = require('../../hooks/make-likable');
+const populateLiked = require('../../hooks/liked-by-current-user');
 
 module.exports = {
   before: {
@@ -41,12 +42,8 @@ module.exports = {
       restrictToAuthenticated(),
       associateCurrentUser({ as: 'authorId' }),
     ],
-    update: [
-      ...restrict
-    ],
-    patch: [
-      ...restrict
-    ],
+    update: [...restrict, makeLikable()],
+    patch: [...restrict, makeLikable()],
     remove: [
       ...restrict
     ]
@@ -55,6 +52,7 @@ module.exports = {
   after: {
     all: [
       populate({ schema: authorSchema }),
+      populateLiked(),
       // populate({ schema: likerSchema }),
     ],
     find: [],
