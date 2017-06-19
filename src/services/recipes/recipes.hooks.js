@@ -30,7 +30,6 @@ const restrict = [
 ];
 
 const makeLikable = require('../../hooks/make-likable');
-const populateLiked = require('../../hooks/liked-by-current-user');
 
 module.exports = {
   before: {
@@ -52,7 +51,6 @@ module.exports = {
   after: {
     all: [
       populate({ schema: authorSchema }),
-      populateLiked(),
       // populate({ schema: likerSchema }),
     ],
     find: [],
